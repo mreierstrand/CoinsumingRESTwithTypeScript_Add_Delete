@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Eksamenseksempel</title>
+  <link rel="stylesheet" type="text/css" href="bundle.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+
+table {
+  border-collapse: collapse;
+  width: 98%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  margin-top: 1em;
+  margin-left: 1em;
+  padding: 5px;
+}
+
+th{
+  background-color: #0072cc;
+  color: white;
+}
+
+thead tr th:first-child,
+tbody tr td:first-child {
+  width: 3em;
+  min-width: 2em;
+  max-width: 2em;
+  word-break: break-all;
+}
+
+tr:nth-of-type(odd) {
+  background-color:white;
+}
+
+tr:nth-child(even) {
+  background-color: lightsteelblue;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.button {
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background: red;
+}
+
+</style>
+
+<body>
+  <h1 style="margin-left: 15px;">Olivers Transporters</h1>
+
+  <div id="app">
+    <button @click="getAllTransporters" class="btn btn-outline-info" style="margin-left: 1em;" >Get all transporters</button>
+    <table>
+      <thead>
+        <tr v-if="transporters.length">
+          <th scope="col">ID</th>
+          <th scope="col">Lastbil</th>
+          <th scope="col">ChaufførNavn</th>
+          <th scope="col">Dato</th>
+          <th scope="col">Antal Km</th>
+          <th scope="col">Gennemsnit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="transporter in transporters">
+          <td>{{ transporter.id }}</td>
+          <td>{{ transporter.lastbil }}</td>
+          <td>{{ transporter.chaufførNavn }}</td>
+          <td>{{ transporter.dato }}</td>
+          <td>{{ transporter.antalKm }}</td>
+          <td>{{ transporter.gennsmsnit }}</td>
+        
+        </tr>
+      </tbody>
+    </table>
+  
+
+  <div id="AddDiv">
+    <h3 style="margin-left: 15px; margin-top: 1em; color: black;">Tilføj transporter</h3>
+    <input v-model.numbwe="formData.id" style="margin-left: 1em;" id="addId" placeholder="Id" type="number" />
+    <input v-model="formData.lastbil" id="addLastbil" placeholder="Lastbil" type="text" />
+    <input v-model="formData.chaufførNavn" id="addChaufførNavn" placeholder="ChaufførNavn" type="text"  />
+    <input v-model="formData.dato" id="addDato" placeholder="Dato" type="text"  />
+    <input v-model.number="formData.antalKm" id="addAntalKm" placeholder="AntalKm" type="number" />
+    <input v-model.number="formData.gennsmsnit" id="addGennsmsnit" placeholder="Gennemsnit" type="number" />
+    <button id="addButton" v-on:click="addTransporter()" >Add</button>
+    <div>{{ addMessage }}</div>
+  </div>
+  
+  <div id="DeleteDiv" >
+    <h3 style="margin-left: 15px; margin-top: 1em; color: black;">Slet transporter</h3>
+    <input style="margin-left: 15px;" v-model.number="deleteId" placeholder="Transporter ID" type="number" />
+    <button v-on:click="deleteTransporter(deleteId)">Delete</button>
+    <div>{{ deleteMessage }}</div>
+    
+  </div>
+  </div>
+
+
+  <script src="bundle.js"></script>
+</body>
+</html>
